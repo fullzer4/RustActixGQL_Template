@@ -4,6 +4,7 @@ use juniper::{EmptyMutation, EmptySubscription, FieldResult, RootNode, GraphQLOb
 #[graphql(description = " Ping ")]
 struct Ping {
     pong: String,
+    pong2: String,
 }
 
 pub struct QueryRoot;
@@ -12,7 +13,8 @@ pub struct QueryRoot;
 impl QueryRoot {
     fn ping() -> FieldResult<Ping> {
         Ok(Ping {
-            pong: "Pong!".to_string()
+            pong: "Pong!".to_string(),
+            pong2: "Pong!".to_string()
         })
     }
 }
