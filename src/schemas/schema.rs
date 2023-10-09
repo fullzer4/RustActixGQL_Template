@@ -1,7 +1,7 @@
 use juniper::{EmptyMutation, EmptySubscription, FieldResult, RootNode, GraphQLObject};
 
 #[derive(GraphQLObject)]
-#[graphql(description = "A humanoid creature in the Star Wars universe")]
+#[graphql(description = " Ping ")]
 struct Ping {
     pong: String,
 }
