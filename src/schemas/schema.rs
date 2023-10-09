@@ -1,23 +1,24 @@
-use juniper::{RootNode, EmptyMutation};
+use juniper::{EmptyMutation, EmptySubscription, FieldResult, RootNode, GraphQLObject};
+
+#[derive(GraphQLObject)]
+#[graphql(description = "A humanoid creature in the Star Wars universe")]
+struct Ping {
+    pong: String,
+}
 
 pub struct QueryRoot;
 
-#[juniper::object]
+#[juniper::graphql_object]
 impl QueryRoot {
-    fn pings() -> Vec<Iping> {
-        vec![
-            Iping {
-                pong: "Pong!"
-            },
-            Iping {
-                pong: "Pong!"
-            }
-        ]
+    fn ping() -> FieldResult<Ping> {
+        Ok(Ping {
+            pong: "Pong!".to_string()
+        })
     }
 }
 
-pub type Schema = RootNode<'static, QueryRoot, EmptyMutation<()>>;
+pub type Schema = RootNode<'static, QueryRoot, EmptyMutation, EmptySubscription>;
 
 pub fn create_schema() -> Schema {
-    Schema::new(QueryRoot {}, EmptyMutation::new())
+    Schema::new(QueryRoot {}, EmptyMutation::new(), EmptySubscription::new())
 }
